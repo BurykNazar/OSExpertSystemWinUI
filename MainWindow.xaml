@@ -1,0 +1,578 @@
+<Window
+    x:Class="OSExpertSystemWinUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="OS Architect Expert">
+
+    <Grid x:Name="RootGrid">
+        <Grid.Resources>
+            <SolidColorBrush x:Key="ComboBoxBackground" Color="#FF1E293B" />
+            <SolidColorBrush x:Key="ComboBoxBackgroundPointerOver" Color="#FF263449" />
+            <SolidColorBrush x:Key="ComboBoxBackgroundPressed" Color="#FF111827" />
+            <SolidColorBrush x:Key="ComboBoxBackgroundDisabled" Color="#FFCBD5E1" />
+
+            <SolidColorBrush x:Key="ComboBoxForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxForegroundPointerOver" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxForegroundPressed" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxForegroundDisabled" Color="#FF64748B" />
+
+            <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="#FF334155" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="#FF0EA5E9" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushPressed" Color="#FF38BDF8" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushDisabled" Color="#FFCBD5E1" />
+
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForegroundPointerOver" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForegroundPressed" Color="#FFFFFFFF" />
+
+            <SolidColorBrush x:Key="ComboBoxItemBackground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundPointerOver" Color="#FFFFF7ED" />
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundSelected" Color="#FFFFEDD5" />
+            <SolidColorBrush x:Key="ComboBoxItemBackgroundSelectedPointerOver" Color="#FFFFEDD5" />
+
+            <SolidColorBrush x:Key="ComboBoxItemForeground" Color="#FF111827" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundPointerOver" Color="#FF111827" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundSelected" Color="#FF111827" />
+            <SolidColorBrush x:Key="ComboBoxItemForegroundSelectedPointerOver" Color="#FF111827" />
+
+            <Style x:Key="ShellCard" TargetType="Border">
+                <Setter Property="CornerRadius" Value="28" />
+                <Setter Property="Padding" Value="24" />
+                <Setter Property="Background" Value="#FFFFFFFF" />
+                <Setter Property="BorderBrush" Value="#FFD8DEE9" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+
+            <Style x:Key="PanelCard" TargetType="Border">
+                <Setter Property="CornerRadius" Value="28" />
+                <Setter Property="Padding" Value="24" />
+                <Setter Property="Background" Value="#FFFFFFFF" />
+                <Setter Property="BorderBrush" Value="#FFE2E8F0" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+
+            <Style x:Key="FieldLabel" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="#FF253044" />
+                <Setter Property="Margin" Value="0,14,0,6" />
+            </Style>
+
+            <Style x:Key="ChoiceComboBoxItemStyle" TargetType="ComboBoxItem">
+                <Setter Property="Foreground" Value="#FF111827" />
+                <Setter Property="Background" Value="#FFFFFFFF" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="MinHeight" Value="38" />
+            </Style>
+
+            <Style x:Key="ChoiceComboBoxStyle" TargetType="ComboBox">
+                <Setter Property="MinHeight" Value="44" />
+                <Setter Property="CornerRadius" Value="12" />
+                <Setter Property="Foreground" Value="#FFFFFFFF" />
+                <Setter Property="Background" Value="#FF1E293B" />
+                <Setter Property="BorderBrush" Value="#FF334155" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="12,0" />
+                <Setter Property="ItemContainerStyle" Value="{StaticResource ChoiceComboBoxItemStyle}" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#FFF7F3EA" Offset="0" />
+                <GradientStop Color="#FFEFF6FF" Offset="0.42" />
+                <GradientStop Color="#FFF8FAFC" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Canvas IsHitTestVisible="False">
+            <Ellipse Width="520" Height="520" Fill="#18F97316" Canvas.Left="-210" Canvas.Top="-170" />
+            <Ellipse Width="560" Height="560" Fill="#142563EB" Canvas.Left="1060" Canvas.Top="-160" />
+            <Ellipse Width="720" Height="720" Fill="#100EA5E9" Canvas.Left="700" Canvas.Top="560" />
+            <Rectangle Width="1180" Height="2" Fill="#FFD6E2F1" Canvas.Left="120" Canvas.Top="250" Rotation="-8" />
+            <Rectangle Width="860" Height="2" Fill="#FFF3D1A1" Canvas.Left="470" Canvas.Top="410" Rotation="7" />
+        </Canvas>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid
+                x:Name="PageFrame"
+                Padding="30"
+                RowSpacing="18"
+                MaxWidth="1480"
+                HorizontalAlignment="Center">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Border
+                    Grid.Row="0"
+                    CornerRadius="34"
+                    Padding="0"
+                    Background="#FF172033"
+                    BorderBrush="#FF334155"
+                    BorderThickness="1">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            Grid.Column="0"
+                            Background="#FFF97316"
+                            CornerRadius="34,0,0,34" />
+
+                        <Grid
+                            Grid.Column="1"
+                            Padding="30,28"
+                            ColumnSpacing="20">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Border
+                                Width="78"
+                                Height="78"
+                                CornerRadius="24"
+                                Background="#FFFFFBEB"
+                                BorderBrush="#FFF59E0B"
+                                BorderThickness="1"
+                                VerticalAlignment="Center">
+
+                                <Grid>
+                                    <TextBlock
+                                        Text="OS"
+                                        Foreground="#FF9A3412"
+                                        FontSize="24"
+                                        FontWeight="Bold"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+
+                                    <Border
+                                        Width="18"
+                                        Height="18"
+                                        CornerRadius="9"
+                                        Background="#FF22C55E"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Margin="0,0,12,12" />
+                                </Grid>
+                            </Border>
+
+                            <StackPanel
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Spacing="5">
+
+                                <TextBlock
+                                    Text="OS ARCHITECT EXPERT"
+                                    Foreground="#FFFED7AA"
+                                    FontSize="12"
+                                    FontWeight="SemiBold"
+                                    CharacterSpacing="170" />
+
+                                <TextBlock
+                                    Text="Вибір операційної системи"
+                                    Foreground="White"
+                                    FontSize="36"
+                                    FontWeight="Bold"
+                                    TextWrapping="Wrap" />
+
+                                <TextBlock
+                                    Text="Консультаційна система, що моделює логіку системного адміністратора під час добору ОС"
+                                    Foreground="#FFE2E8F0"
+                                    FontSize="15"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Border
+                            Grid.Column="2"
+                            Margin="0,24,28,24"
+                            CornerRadius="24"
+                            Background="#FFFFFBEB"
+                            BorderBrush="#FFFCD34D"
+                            BorderThickness="1"
+                            Padding="18"
+                            VerticalAlignment="Center">
+
+                            <StackPanel Spacing="5">
+                                <TextBlock
+                                    Text="Knowledge base"
+                                    Foreground="#FF92400E"
+                                    FontSize="12"
+                                    FontWeight="SemiBold" />
+
+                                <TextBlock
+                                    Text="Rules + weights"
+                                    Foreground="#FF111827"
+                                    FontSize="19"
+                                    FontWeight="Bold" />
+
+                                <TextBlock
+                                    Text="пояснювана порада"
+                                    Foreground="#FF475569"
+                                    FontSize="12" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+
+                <Grid
+                    Grid.Row="1"
+                    ColumnSpacing="12">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="0"
+                        Click="ShowConsultation_Click"
+                        Background="#FFFFFFFF"
+                        BorderBrush="#FFCBD5E1"
+                        BorderThickness="1"
+                        CornerRadius="16"
+                        Padding="18,10">
+                        <Button.Resources>
+                            <SolidColorBrush x:Key="ButtonBackground" Color="#FFFFFFFF" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FFF8FAFC" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FFE2E8F0" />
+                            <SolidColorBrush x:Key="ButtonForeground" Color="#FF111827" />
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FF111827" />
+                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FF111827" />
+                            <SolidColorBrush x:Key="ButtonBorderBrush" Color="#FFCBD5E1" />
+                            <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#FF0EA5E9" />
+                            <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#FF0284C7" />
+                        </Button.Resources>
+                        <TextBlock
+                            Text="Консультація"
+                            Foreground="#FF111827"
+                            FontWeight="SemiBold" />
+                    </Button>
+
+                    <Button
+                        Grid.Column="1"
+                        Click="ShowKnowledge_Click"
+                        Background="#FFFFFFFF"
+                        BorderBrush="#FFCBD5E1"
+                        BorderThickness="1"
+                        CornerRadius="16"
+                        Padding="18,10">
+                        <Button.Resources>
+                            <SolidColorBrush x:Key="ButtonBackground" Color="#FFFFFFFF" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FFF8FAFC" />
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FFE2E8F0" />
+                            <SolidColorBrush x:Key="ButtonForeground" Color="#FF111827" />
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FF111827" />
+                            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FF111827" />
+                            <SolidColorBrush x:Key="ButtonBorderBrush" Color="#FFCBD5E1" />
+                            <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#FF0EA5E9" />
+                            <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#FF0284C7" />
+                        </Button.Resources>
+                        <TextBlock
+                            Text="База знань"
+                            Foreground="#FF111827"
+                            FontWeight="SemiBold" />
+                    </Button>
+                </Grid>
+
+                <Grid
+                    x:Name="MainWorkspace"
+                    Grid.Row="2"
+                    ColumnSpacing="18"
+                    RowSpacing="18">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition x:Name="FormColumn" Width="460" />
+                        <ColumnDefinition x:Name="ResultColumn" Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border
+                        x:Name="ConsultationPanel"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Style="{StaticResource ShellCard}">
+
+                        <StackPanel>
+                            <Grid ColumnSpacing="14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Border
+                                    Width="52"
+                                    Height="52"
+                                    CornerRadius="18"
+                                    Background="#FFFFF7ED"
+                                    BorderBrush="#FFFED7AA"
+                                    BorderThickness="1"
+                                    VerticalAlignment="Top">
+
+                                    <TextBlock
+                                        Text="◈"
+                                        Foreground="#FFF97316"
+                                        FontSize="25"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" />
+                                </Border>
+
+                                <StackPanel
+                                    Grid.Column="1"
+                                    Spacing="4">
+
+                                    <TextBlock
+                                        Text="Матриця вимог"
+                                        FontSize="25"
+                                        FontWeight="Bold"
+                                        Foreground="#FF111827" />
+
+                                    <TextBlock
+                                        Text="Оберіть характеристики середовища. Система не замінює експерта, а відтворює його консультаційну логіку."
+                                        Foreground="#FF475569"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+
+                            <TextBlock Text="Тип пристрою" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="DeviceTypeBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <TextBlock Text="Основна задача" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="MainTaskBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <TextBlock Text="Рівень обладнання" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="HardwareBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <TextBlock Text="Досвід користувача" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="ExperienceBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <TextBlock Text="Сумісність із програмами" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="CompatibilityBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <TextBlock Text="Пріоритет безпеки" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="SecurityBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <TextBlock Text="Адміністрування" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="AdministrationBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <TextBlock Text="Бюджет" Style="{StaticResource FieldLabel}" />
+                            <ComboBox
+                                x:Name="BudgetBox"
+                                Style="{StaticResource ChoiceComboBoxStyle}"
+                                DisplayMemberPath="Title"
+                                SelectionChanged="OnInputChanged" />
+
+                            <Grid
+                                Margin="0,22,0,0"
+                                ColumnSpacing="10">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button
+                                    Grid.Column="0"
+                                    Click="Reset_Click"
+                                    Background="#FFF1F5F9"
+                                    BorderBrush="#FFCBD5E1"
+                                    BorderThickness="1"
+                                    CornerRadius="16"
+                                    MinHeight="48">
+                                    <Button.Resources>
+                                        <SolidColorBrush x:Key="ButtonBackground" Color="#FFF1F5F9" />
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FFE2E8F0" />
+                                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FFCBD5E1" />
+                                        <SolidColorBrush x:Key="ButtonForeground" Color="#FF111827" />
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FF111827" />
+                                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FF111827" />
+                                        <SolidColorBrush x:Key="ButtonBorderBrush" Color="#FFCBD5E1" />
+                                        <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#FF64748B" />
+                                        <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#FF475569" />
+                                    </Button.Resources>
+                                    <TextBlock
+                                        Text="Очистити"
+                                        Foreground="#FF111827"
+                                        FontWeight="SemiBold" />
+                                </Button>
+
+                                <Button
+                                    Grid.Column="1"
+                                    Click="Evaluate_Click"
+                                    Background="#FFFFEDD5"
+                                    BorderBrush="#FFF97316"
+                                    BorderThickness="1"
+                                    CornerRadius="16"
+                                    MinHeight="48">
+                                    <Button.Resources>
+                                        <SolidColorBrush x:Key="ButtonBackground" Color="#FFFFEDD5" />
+                                        <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FFFFD7AA" />
+                                        <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FFFDBA74" />
+                                        <SolidColorBrush x:Key="ButtonForeground" Color="#FF7C2D12" />
+                                        <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="#FF7C2D12" />
+                                        <SolidColorBrush x:Key="ButtonForegroundPressed" Color="#FF431407" />
+                                        <SolidColorBrush x:Key="ButtonBorderBrush" Color="#FFF97316" />
+                                        <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#FFEA580C" />
+                                        <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#FFC2410C" />
+                                    </Button.Resources>
+                                    <TextBlock
+                                        Text="Отримати пораду"
+                                        Foreground="#FF7C2D12"
+                                        FontWeight="Bold" />
+                                </Button>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <Grid
+                        x:Name="ResultPane"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        RowSpacing="18">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Border
+                            Grid.Row="0"
+                            Style="{StaticResource PanelCard}">
+
+                            <Grid
+                                x:Name="SummaryGrid"
+                                ColumnSpacing="20"
+                                RowSpacing="16">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="300" />
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Spacing="7">
+                                    <TextBlock
+                                        Text="Рекомендація експерта"
+                                        Foreground="#FFEA580C"
+                                        FontSize="13"
+                                        FontWeight="SemiBold" />
+
+                                    <TextBlock
+                                        x:Name="BestTitleText"
+                                        Text="Очікується консультація"
+                                        Foreground="#FF111827"
+                                        FontSize="31"
+                                        FontWeight="Bold"
+                                        TextWrapping="Wrap" />
+
+                                    <TextBlock
+                                        x:Name="BestDescriptionText"
+                                        Text="Заповніть параметри та натисніть кнопку отримання поради."
+                                        Foreground="#FF475569"
+                                        TextWrapping="Wrap" />
+                                </StackPanel>
+
+                                <Border
+                                    x:Name="ScorePanel"
+                                    Grid.Column="1"
+                                    CornerRadius="24"
+                                    Background="#FFFFF7ED"
+                                    BorderBrush="#FFF97316"
+                                    BorderThickness="1"
+                                    Padding="18"
+                                    VerticalAlignment="Stretch"
+                                    MinWidth="280">
+
+                                    <StackPanel
+                                        VerticalAlignment="Center"
+                                        Spacing="8">
+
+                                        <TextBlock
+                                            Text="індекс відповідності"
+                                            Foreground="#FF92400E"
+                                            FontSize="12"
+                                            HorizontalAlignment="Center" />
+
+                                        <TextBlock
+                                            x:Name="BestPercentText"
+                                            Text="0%"
+                                            Foreground="#FF0F172A"
+                                            FontSize="38"
+                                            FontWeight="Bold"
+                                            HorizontalAlignment="Center"
+                                            TextAlignment="Center" />
+
+                                        <TextBlock
+                                            x:Name="BestPercentLabelText"
+                                            Text="відповідності"
+                                            Foreground="#FF7C2D12"
+                                            FontSize="13"
+                                            FontWeight="SemiBold"
+                                            HorizontalAlignment="Center"
+                                            TextAlignment="Center" />
+
+                                        <ProgressBar
+                                            x:Name="BestProgress"
+                                            Maximum="100"
+                                            Value="0"
+                                            Height="8" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Grid
+                            Grid.Row="1"
+                            x:Name="ContentHost" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Window>
